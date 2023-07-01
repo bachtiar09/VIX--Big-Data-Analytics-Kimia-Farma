@@ -1,0 +1,69 @@
+scrip sql 
+nama : abie bachtiar
+tools : postgresql
+
+-- tabel barang
+CREATE TABLE barang (
+  kode_barang VARCHAR,
+  sektor VARCHAR(45) NULL
+  nama_barang VARCHAR,
+  tipe VARCHAR,
+  nama_tipe VARCHAR,
+  kode_lini VARCHAR,
+  lini VARCHAR,
+  kemasan VARCHAR,
+  PRIMARY KEY (kode_barang));
+
+-- tabel pelanggan
+
+CREATE TABLE pelanggan (
+  id_customer VARCHAR,
+  level VARCHAR,
+  nama VARCHAR,
+  id_cabang VARCHAR,
+  cabang_sales VARCHAR,
+  id_group VARCHAR,
+  group_ VARCHAR,
+  PRIMARY KEY (id_customer));
+
+-- tabel penjualan
+CREATE TABLE penjualan (
+  id_distributor VARCHAR,
+  id_cabang VARCHAR,
+  id_invoice VARCHAR,
+  tanggal DATE NULL,
+  id_customer VARCHAR,
+  id_barang VARCHAR,
+  jumlah INT,
+  unit VARCHAR,
+  harga DECIMAL,
+  mata_uang VARCHAR,
+  brand_id VARCHAR,
+  lini VARCHAR,
+  PRIMARY KEY (id_invoice));
+
+
+-- tabel base
+CREATE TABLE t_base as
+    SELECT
+        t1.*,
+        t2.nama,t2.cabang_sales,
+        t2.id_group,t2.group_,
+        t3.nama_barang,t3.kode_lini,
+        t3.kemasan
+    FROM penjualan t1
+        LEFT JOIN pelanggan t2
+            ON t2.id_customer = t1.id_customer
+        LEFT JOIN barang t3
+            ON t3.kode_barang = t1.id_barang
+    ORDER BY t1.tanggal
+
+-- tabel agg
+CREATE TABLE t_agg as
+select id_distributor, id_invoice, tanggal, 
+        TO_CHAR(tanggal, 'Month') AS bulan,
+        jumlah, harga, lini, nama, cabang_sales as lokasi, 
+        group_, nama_barang as nama_product,
+        (harga*jumlah) as revenue
+from t_base
+order by 3
