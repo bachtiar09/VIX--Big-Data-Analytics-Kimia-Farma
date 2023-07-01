@@ -13,5 +13,4 @@ VIX Big Data Analytics Kimia Farma adalah virtual internship experience selengga
 
 -- data source : [data](https://github.com/bachtiar09/VIX--Big-Data-Analytics-Kimia-Farma/blob/main/Data_Source.xlsx)
 
-
-![Dasboard](file:///C:/Users/ASUS/Downloads/Dashboard_Penjualan_PT_Kimia_Farm_a_Tbk.pdf)
+![Final Project Dasboard](https://github.com/bachtiar09/VIX--Big-Data-Analytics-Kimia-Farma/blob/main/Dashboard_Penjualan_PT_Kimia_Farm_a_Tbk_page-0001.jpg?raw=true)
